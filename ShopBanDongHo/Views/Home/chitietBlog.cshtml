@@ -1,0 +1,122 @@
+﻿@model ShopBanDongHo.Models.Blog
+
+@{
+    ViewBag.Title = "chitietBlog";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+
+<section id="blog" class="blog">
+    <div class="container" data-aos="fade-up">
+        <h6 class="heading" style="font-size: 50px; text-align:center;">News</h6>
+        <div class="row">
+
+            <div class="col-lg-12 entries">
+
+                <article class="entry entry-single">
+
+                    <div class="entry-img" style="display: block; margin-left: auto; margin-right: auto;">
+                        <img src=@Url.Content("~/Assets/BlogLayout/img/" + Model.AnhBlog)>
+                    </div>
+
+                    <h2 class="entry-title">
+                        <a href="blog-single.html">  @Html.DisplayFor(model => model.TieuDe)</a>
+                    </h2>
+
+                    <div class="entry-meta">
+                        <ul>
+                            <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="#">@Html.DisplayFor(model => model.NgPost)</a></li>
+                            <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="#"><time datetime="2020-01-01">@Html.DisplayFor(model => model.ThoiGian)</time></a></li>
+                            <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a href="#">12 Comments</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="entry-content">
+                        <p style="font-size:18px;">
+                            @Html.DisplayFor(model => model.NoiDung)
+                        </p>
+
+
+
+
+
+
+
+
+
+
+                        @*<img src="@Url.Content("~/Assets/images/" + Model.AnhBlog_nho)" class="img-fluid" alt="">*@
+
+
+
+
+
+                    </div>
+
+                    <div class="entry-footer">
+                        <i class="bi bi-folder"></i>
+                        <ul class="cats">
+                            <li><a href="#">Business</a></li>
+                        </ul>
+
+                        <i class="bi bi-tags"></i>
+                        <ul class="tags">
+                            <li><a href="#">Creative</a></li>
+                            <li><a href="#">Tips</a></li>
+                            <li><a href="#">Marketing</a></li>
+                        </ul>
+                    </div>
+
+                </article><!-- End blog entry -->
+                <!-- End blog author bio -->
+
+                <div class="blog-comments">
+
+                    <h4 class="comments-count">8 Comments</h4>
+
+                    <div id="comment-1" class="comment">
+                        <div class="d-flex">
+                            <div class="fb-comments" data-href="https://www.facebook.com/Xwatch.DongHoThat/photos/a.634415960010916/3869084693210677/" data-width="" data-numposts=""></div>
+                        </div>
+                    </div>
+
+                    <div class="reply-form">
+                        <h4>Leave a Reply</h4>
+                        <p>Your email address will not be published. Required fields are marked * </p>
+                        <form action="">
+                            <div class="row">
+                                <div class="col-md-6 form-group">
+                                    <input name="name" type="text" class="form-control" placeholder="Your Name*">
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <input name="email" type="text" class="form-control" placeholder="Your Email*">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col form-group">
+                                    <input name="website" type="text" class="form-control" placeholder="Your Website">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col form-group">
+                                    <textarea name="comment" class="form-control" placeholder="Your Comment*"></textarea>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Post Comment</button>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </div><!-- End blog entries list -->
+
+
+
+        </div>
+
+    </div>
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v10.0&appId=1815063302000827&autoLogAppEvents=1" nonce="UerBFAUl"></script>
+</section>

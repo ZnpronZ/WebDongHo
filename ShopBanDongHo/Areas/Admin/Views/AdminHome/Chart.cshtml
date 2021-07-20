@@ -1,0 +1,64 @@
+﻿
+@{
+    ViewBag.Title = "Chart";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<div>
+    <canvas id="myChart"></canvas>
+</div>
+<script>
+    $.ajax({
+        url: 'https://localhost:44374/api/Chart',
+        method: 'GET',
+        contentType: 'application/json',
+        success: function (datas) {
+            console.log(datas)
+            const ten = [];
+            var tien = [];
+            for (var i = 0; i < datas.length; i++) {
+                ten.push(datas[i].tennhanvien)
+                tien.push(datas[i].tongdoanhthu)
+            }
+            console.log(ten)
+            console.log(tien)
+
+
+
+            const labels = [
+                'January',
+                'February',
+                'March',
+                'April',
+                'May',
+                'June',
+            ];
+            const data = {
+                labels: ten,
+                datasets: [{
+                    label: 'Tổng doanh thu của nhân viên',
+                    backgroundColor: 'rgb(255, 99, 132)',
+                    borderColor: 'rgb(255, 99, 132)',
+                    data: tien,
+                }]
+            };
+            const config = {
+                type: 'bar',
+                data,
+                options: {}
+            };
+
+            var myChart = new Chart(
+                document.getElementById('myChart'),
+                config
+            );
+
+        }
+    });
+    // === include 'setup' then 'config' above ===
+    
+</script>
+

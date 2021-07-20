@@ -1,0 +1,486 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="QuanLiDongHoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Blog">
+          <Key>
+            <PropertyRef Name="MaBlog" />
+          </Key>
+          <Property Name="MaBlog" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="AnhBlog" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TieuDe" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="ThoiGian" Type="datetime" Nullable="false" />
+          <Property Name="NgPost" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="NoiDung" Type="nvarchar(max)" />
+          <Property Name="AnhBlog_nho" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ChiTietDongHo">
+          <Key>
+            <PropertyRef Name="MaSP" />
+          </Key>
+          <Property Name="MaSP" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TenSP" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ThuongHieu" Type="nvarchar" MaxLength="50" />
+          <Property Name="XuatXu" Type="nvarchar" MaxLength="50" />
+          <Property Name="GioiTinh" Type="nchar" MaxLength="10" />
+          <Property Name="Anh" Type="nvarchar" MaxLength="500" />
+          <Property Name="Gia" Type="int" Nullable="false" />
+          <Property Name="chatLieuMat" Type="nvarchar" MaxLength="50" />
+          <Property Name="duongKinhMat" Type="float" />
+          <Property Name="chatLieuDay" Type="nvarchar" MaxLength="50" />
+          <Property Name="sizeDay" Type="float" />
+          <Property Name="chatLieuVo" Type="nvarchar" MaxLength="100" />
+          <Property Name="duongKinhVo" Type="float" />
+          <Property Name="timeBaoHanh" Type="float" />
+          <Property Name="active" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ChiTietHoaDon">
+          <Key>
+            <PropertyRef Name="MaHD" />
+          </Key>
+          <Property Name="MaSP" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MaHD" Type="int" Nullable="false" />
+          <Property Name="SoLuong" Type="int" />
+          <Property Name="TongTien" Type="float" />
+        </EntityType>
+        <EntityType Name="CongTy">
+          <Key>
+            <PropertyRef Name="TenCty" />
+          </Key>
+          <Property Name="TenCty" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DiaChiCty" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SdtCty" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DoanhThu">
+          <Key>
+            <PropertyRef Name="MaNgayThang" />
+          </Key>
+          <Property Name="MaNgayThang" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="DoanhThu" Type="float" />
+          <Property Name="TongSLBanDc" Type="int" />
+          <Property Name="TenNhanVien" Type="nvarchar" MaxLength="50" />
+          <Property Name="SoDonBan" Type="int" />
+          <Property Name="DoanhThuNV" Type="float" />
+          <Property Name="TenSpBanChay" Type="nvarchar" MaxLength="50" />
+          <Property Name="SLBan" Type="int" />
+        </EntityType>
+        <EntityType Name="HoaDon">
+          <Key>
+            <PropertyRef Name="MaHD" />
+          </Key>
+          <Property Name="MaHD" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NgayTao" Type="datetime" />
+          <Property Name="MaKH" Type="nvarchar" MaxLength="50" />
+          <Property Name="ShipName" Type="nvarchar" MaxLength="50" />
+          <Property Name="ShipMobile" Type="nvarchar" MaxLength="50" />
+          <Property Name="ShipAdress" Type="nvarchar" MaxLength="50" />
+          <Property Name="ShipEmail" Type="nvarchar" MaxLength="50" />
+          <Property Name="Status" Type="int" />
+        </EntityType>
+        <EntityType Name="KhachHang">
+          <Key>
+            <PropertyRef Name="MaKH" />
+          </Key>
+          <Property Name="MaKH" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TenKH" Type="nvarchar" MaxLength="50" />
+          <Property Name="NgaySinh" Type="date" />
+          <Property Name="GioiTinh" Type="nvarchar" MaxLength="20" />
+          <Property Name="AnhDaiDien" Type="nvarchar" MaxLength="100" />
+          <Property Name="DiaChi" Type="nvarchar(max)" />
+          <Property Name="SoDT" Type="nvarchar" MaxLength="15" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" />
+          <Property Name="TenTK" Type="nvarchar" MaxLength="50" />
+          <Property Name="MatKhau" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="NhanVien">
+          <Key>
+            <PropertyRef Name="MaNV" />
+          </Key>
+          <Property Name="MaNV" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TenNV" Type="nvarchar" MaxLength="50" />
+          <Property Name="SoDT" Type="nvarchar" MaxLength="20" />
+          <Property Name="DiaChi" Type="nvarchar(max)" />
+          <Property Name="Luong" Type="int" />
+        </EntityType>
+        <EntityType Name="tThuongHieu">
+          <Key>
+            <PropertyRef Name="ThuongHieu" />
+          </Key>
+          <Property Name="ThuongHieu" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TenThuongHieu" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tXuatXu">
+          <Key>
+            <PropertyRef Name="XuatXu" />
+          </Key>
+          <Property Name="XuatXu" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TenXuatXu" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="fk_htk_ThuongHieu">
+          <End Role="tThuongHieu" Type="Self.tThuongHieu" Multiplicity="0..1" />
+          <End Role="ChiTietDongHo" Type="Self.ChiTietDongHo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tThuongHieu">
+              <PropertyRef Name="ThuongHieu" />
+            </Principal>
+            <Dependent Role="ChiTietDongHo">
+              <PropertyRef Name="ThuongHieu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_htk_XuatXu">
+          <End Role="tXuatXu" Type="Self.tXuatXu" Multiplicity="0..1" />
+          <End Role="ChiTietDongHo" Type="Self.ChiTietDongHo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tXuatXu">
+              <PropertyRef Name="XuatXu" />
+            </Principal>
+            <Dependent Role="ChiTietDongHo">
+              <PropertyRef Name="XuatXu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="QuanLiDongHoModelStoreContainer">
+          <EntitySet Name="Blog" EntityType="Self.Blog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ChiTietDongHo" EntityType="Self.ChiTietDongHo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ChiTietHoaDon" EntityType="Self.ChiTietHoaDon" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CongTy" EntityType="Self.CongTy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DoanhThu" EntityType="Self.DoanhThu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HoaDon" EntityType="Self.HoaDon" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KhachHang" EntityType="Self.KhachHang" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NhanVien" EntityType="Self.NhanVien" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tThuongHieu" EntityType="Self.tThuongHieu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tXuatXu" EntityType="Self.tXuatXu" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="fk_htk_ThuongHieu" Association="Self.fk_htk_ThuongHieu">
+            <End Role="tThuongHieu" EntitySet="tThuongHieu" />
+            <End Role="ChiTietDongHo" EntitySet="ChiTietDongHo" />
+          </AssociationSet>
+          <AssociationSet Name="fk_htk_XuatXu" Association="Self.fk_htk_XuatXu">
+            <End Role="tXuatXu" EntitySet="tXuatXu" />
+            <End Role="ChiTietDongHo" EntitySet="ChiTietDongHo" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="QuanLiDongHoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Blog">
+          <Key>
+            <PropertyRef Name="MaBlog" />
+          </Key>
+          <Property Name="MaBlog" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AnhBlog" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TieuDe" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ThoiGian" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="NgPost" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AnhBlog_nho" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ChiTietDongHo">
+          <Key>
+            <PropertyRef Name="MaSP" />
+          </Key>
+          <Property Name="MaSP" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TenSP" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ThuongHieu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="XuatXu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GioiTinh" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Anh" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Gia" Type="Int32" Nullable="false" />
+          <Property Name="chatLieuMat" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="duongKinhMat" Type="Double" />
+          <Property Name="chatLieuDay" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="sizeDay" Type="Double" />
+          <Property Name="chatLieuVo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="duongKinhVo" Type="Double" />
+          <Property Name="timeBaoHanh" Type="Double" />
+          <Property Name="active" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="tThuongHieu" Relationship="Self.fk_htk_ThuongHieu" FromRole="ChiTietDongHo" ToRole="tThuongHieu" />
+          <NavigationProperty Name="tXuatXu" Relationship="Self.fk_htk_XuatXu" FromRole="ChiTietDongHo" ToRole="tXuatXu" />
+        </EntityType>
+        <EntityType Name="ChiTietHoaDon">
+          <Key>
+            <PropertyRef Name="MaHD" />
+          </Key>
+          <Property Name="MaSP" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MaHD" Type="Int32" Nullable="false" />
+          <Property Name="SoLuong" Type="Int32" />
+          <Property Name="TongTien" Type="Double" />
+        </EntityType>
+        <EntityType Name="CongTy">
+          <Key>
+            <PropertyRef Name="TenCty" />
+          </Key>
+          <Property Name="TenCty" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DiaChiCty" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SdtCty" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DoanhThu">
+          <Key>
+            <PropertyRef Name="MaNgayThang" />
+          </Key>
+          <Property Name="MaNgayThang" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DoanhThu1" Type="Double" />
+          <Property Name="TongSLBanDc" Type="Int32" />
+          <Property Name="TenNhanVien" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SoDonBan" Type="Int32" />
+          <Property Name="DoanhThuNV" Type="Double" />
+          <Property Name="TenSpBanChay" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SLBan" Type="Int32" />
+        </EntityType>
+        <EntityType Name="HoaDon">
+          <Key>
+            <PropertyRef Name="MaHD" />
+          </Key>
+          <Property Name="MaHD" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NgayTao" Type="DateTime" Precision="3" />
+          <Property Name="MaKH" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ShipName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ShipMobile" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ShipAdress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ShipEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" />
+        </EntityType>
+        <EntityType Name="KhachHang">
+          <Key>
+            <PropertyRef Name="MaKH" />
+          </Key>
+          <Property Name="MaKH" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenKH" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NgaySinh" Type="DateTime" Precision="0" />
+          <Property Name="GioiTinh" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="AnhDaiDien" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DiaChi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SoDT" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="TenTK" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MatKhau" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="NhanVien">
+          <Key>
+            <PropertyRef Name="MaNV" />
+          </Key>
+          <Property Name="MaNV" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenNV" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SoDT" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="DiaChi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Luong" Type="Int32" />
+        </EntityType>
+        <EntityType Name="tThuongHieu">
+          <Key>
+            <PropertyRef Name="ThuongHieu" />
+          </Key>
+          <Property Name="ThuongHieu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TenThuongHieu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="ChiTietDongHoes" Relationship="Self.fk_htk_ThuongHieu" FromRole="tThuongHieu" ToRole="ChiTietDongHo" />
+        </EntityType>
+        <EntityType Name="tXuatXu">
+          <Key>
+            <PropertyRef Name="XuatXu" />
+          </Key>
+          <Property Name="XuatXu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TenXuatXu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="ChiTietDongHoes" Relationship="Self.fk_htk_XuatXu" FromRole="tXuatXu" ToRole="ChiTietDongHo" />
+        </EntityType>
+        <Association Name="fk_htk_ThuongHieu">
+          <End Role="tThuongHieu" Type="Self.tThuongHieu" Multiplicity="0..1" />
+          <End Role="ChiTietDongHo" Type="Self.ChiTietDongHo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tThuongHieu">
+              <PropertyRef Name="ThuongHieu" />
+            </Principal>
+            <Dependent Role="ChiTietDongHo">
+              <PropertyRef Name="ThuongHieu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_htk_XuatXu">
+          <End Role="tXuatXu" Type="Self.tXuatXu" Multiplicity="0..1" />
+          <End Role="ChiTietDongHo" Type="Self.ChiTietDongHo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tXuatXu">
+              <PropertyRef Name="XuatXu" />
+            </Principal>
+            <Dependent Role="ChiTietDongHo">
+              <PropertyRef Name="XuatXu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="QuanLiDongHoEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Blogs" EntityType="Self.Blog" />
+          <EntitySet Name="ChiTietDongHoes" EntityType="Self.ChiTietDongHo" />
+          <EntitySet Name="ChiTietHoaDons" EntityType="Self.ChiTietHoaDon" />
+          <EntitySet Name="CongTies" EntityType="Self.CongTy" />
+          <EntitySet Name="DoanhThus" EntityType="Self.DoanhThu" />
+          <EntitySet Name="HoaDons" EntityType="Self.HoaDon" />
+          <EntitySet Name="KhachHangs" EntityType="Self.KhachHang" />
+          <EntitySet Name="NhanViens" EntityType="Self.NhanVien" />
+          <EntitySet Name="tThuongHieux" EntityType="Self.tThuongHieu" />
+          <EntitySet Name="tXuatXus" EntityType="Self.tXuatXu" />
+          <AssociationSet Name="fk_htk_ThuongHieu" Association="Self.fk_htk_ThuongHieu">
+            <End Role="tThuongHieu" EntitySet="tThuongHieux" />
+            <End Role="ChiTietDongHo" EntitySet="ChiTietDongHoes" />
+          </AssociationSet>
+          <AssociationSet Name="fk_htk_XuatXu" Association="Self.fk_htk_XuatXu">
+            <End Role="tXuatXu" EntitySet="tXuatXus" />
+            <End Role="ChiTietDongHo" EntitySet="ChiTietDongHoes" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="QuanLiDongHoModelStoreContainer" CdmEntityContainer="QuanLiDongHoEntities">
+          <EntitySetMapping Name="Blogs">
+            <EntityTypeMapping TypeName="QuanLiDongHoModel.Blog">
+              <MappingFragment StoreEntitySet="Blog">
+                <ScalarProperty Name="MaBlog" ColumnName="MaBlog" />
+                <ScalarProperty Name="AnhBlog" ColumnName="AnhBlog" />
+                <ScalarProperty Name="TieuDe" ColumnName="TieuDe" />
+                <ScalarProperty Name="ThoiGian" ColumnName="ThoiGian" />
+                <ScalarProperty Name="NgPost" ColumnName="NgPost" />
+                <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
+                <ScalarProperty Name="AnhBlog_nho" ColumnName="AnhBlog_nho" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ChiTietDongHoes">
+            <EntityTypeMapping TypeName="QuanLiDongHoModel.ChiTietDongHo">
+              <MappingFragment StoreEntitySet="ChiTietDongHo">
+                <ScalarProperty Name="MaSP" ColumnName="MaSP" />
+                <ScalarProperty Name="TenSP" ColumnName="TenSP" />
+                <ScalarProperty Name="ThuongHieu" ColumnName="ThuongHieu" />
+                <ScalarProperty Name="XuatXu" ColumnName="XuatXu" />
+                <ScalarProperty Name="GioiTinh" ColumnName="GioiTinh" />
+                <ScalarProperty Name="Anh" ColumnName="Anh" />
+                <ScalarProperty Name="Gia" ColumnName="Gia" />
+                <ScalarProperty Name="chatLieuMat" ColumnName="chatLieuMat" />
+                <ScalarProperty Name="duongKinhMat" ColumnName="duongKinhMat" />
+                <ScalarProperty Name="chatLieuDay" ColumnName="chatLieuDay" />
+                <ScalarProperty Name="sizeDay" ColumnName="sizeDay" />
+                <ScalarProperty Name="chatLieuVo" ColumnName="chatLieuVo" />
+                <ScalarProperty Name="duongKinhVo" ColumnName="duongKinhVo" />
+                <ScalarProperty Name="timeBaoHanh" ColumnName="timeBaoHanh" />
+                <ScalarProperty Name="active" ColumnName="active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ChiTietHoaDons">
+            <EntityTypeMapping TypeName="QuanLiDongHoModel.ChiTietHoaDon">
+              <MappingFragment StoreEntitySet="ChiTietHoaDon">
+                <ScalarProperty Name="MaSP" ColumnName="MaSP" />
+                <ScalarProperty Name="MaHD" ColumnName="MaHD" />
+                <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
+                <ScalarProperty Name="TongTien" ColumnName="TongTien" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CongTies">
+            <EntityTypeMapping TypeName="QuanLiDongHoModel.CongTy">
+              <MappingFragment StoreEntitySet="CongTy">
+                <ScalarProperty Name="TenCty" ColumnName="TenCty" />
+                <ScalarProperty Name="DiaChiCty" ColumnName="DiaChiCty" />
+                <ScalarProperty Name="SdtCty" ColumnName="SdtCty" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DoanhThus">
+            <EntityTypeMapping TypeName="QuanLiDongHoModel.DoanhThu">
+              <MappingFragment StoreEntitySet="DoanhThu">
+                <ScalarProperty Name="MaNgayThang" ColumnName="MaNgayThang" />
+                <ScalarProperty Name="DoanhThu1" ColumnName="DoanhThu" />
+                <ScalarProperty Name="TongSLBanDc" ColumnName="TongSLBanDc" />
+                <ScalarProperty Name="TenNhanVien" ColumnName="TenNhanVien" />
+                <ScalarProperty Name="SoDonBan" ColumnName="SoDonBan" />
+                <ScalarProperty Name="DoanhThuNV" ColumnName="DoanhThuNV" />
+                <ScalarProperty Name="TenSpBanChay" ColumnName="TenSpBanChay" />
+                <ScalarProperty Name="SLBan" ColumnName="SLBan" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HoaDons">
+            <EntityTypeMapping TypeName="QuanLiDongHoModel.HoaDon">
+              <MappingFragment StoreEntitySet="HoaDon">
+                <ScalarProperty Name="MaHD" ColumnName="MaHD" />
+                <ScalarProperty Name="NgayTao" ColumnName="NgayTao" />
+                <ScalarProperty Name="MaKH" ColumnName="MaKH" />
+                <ScalarProperty Name="ShipName" ColumnName="ShipName" />
+                <ScalarProperty Name="ShipMobile" ColumnName="ShipMobile" />
+                <ScalarProperty Name="ShipAdress" ColumnName="ShipAdress" />
+                <ScalarProperty Name="ShipEmail" ColumnName="ShipEmail" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KhachHangs">
+            <EntityTypeMapping TypeName="QuanLiDongHoModel.KhachHang">
+              <MappingFragment StoreEntitySet="KhachHang">
+                <ScalarProperty Name="MaKH" ColumnName="MaKH" />
+                <ScalarProperty Name="TenKH" ColumnName="TenKH" />
+                <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
+                <ScalarProperty Name="GioiTinh" ColumnName="GioiTinh" />
+                <ScalarProperty Name="AnhDaiDien" ColumnName="AnhDaiDien" />
+                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+                <ScalarProperty Name="SoDT" ColumnName="SoDT" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="TenTK" ColumnName="TenTK" />
+                <ScalarProperty Name="MatKhau" ColumnName="MatKhau" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NhanViens">
+            <EntityTypeMapping TypeName="QuanLiDongHoModel.NhanVien">
+              <MappingFragment StoreEntitySet="NhanVien">
+                <ScalarProperty Name="MaNV" ColumnName="MaNV" />
+                <ScalarProperty Name="TenNV" ColumnName="TenNV" />
+                <ScalarProperty Name="SoDT" ColumnName="SoDT" />
+                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+                <ScalarProperty Name="Luong" ColumnName="Luong" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tThuongHieux">
+            <EntityTypeMapping TypeName="QuanLiDongHoModel.tThuongHieu">
+              <MappingFragment StoreEntitySet="tThuongHieu">
+                <ScalarProperty Name="ThuongHieu" ColumnName="ThuongHieu" />
+                <ScalarProperty Name="TenThuongHieu" ColumnName="TenThuongHieu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tXuatXus">
+            <EntityTypeMapping TypeName="QuanLiDongHoModel.tXuatXu">
+              <MappingFragment StoreEntitySet="tXuatXu">
+                <ScalarProperty Name="XuatXu" ColumnName="XuatXu" />
+                <ScalarProperty Name="TenXuatXu" ColumnName="TenXuatXu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

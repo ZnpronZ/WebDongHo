@@ -1,0 +1,79 @@
+﻿@using PagedList.Mvc;
+@using PagedList;
+@model IPagedList<ShopBanDongHo.Models.Blog>
+@{
+    ViewBag.Title = "Blog";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+<link href="~/Assets/BlogLayout/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="~/Assets/BlogLayout/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+<link href="~/Assets/BlogLayout/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+<link href="~/Assets/BlogLayout/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+<link href="~/Assets/BlogLayout/vendor/remixicon/remixicon.css" rel="stylesheet">
+<link href="~/Assets/BlogLayout/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+<!-- Template Main CSS File -->
+<link href="~/Assets/BlogLayout/css/style.css" rel="stylesheet">
+
+<section id="blog" class="blog">
+    <div class="container" data-aos="fade-up">
+        <h6 class="heading" style="font-size: 50px; text-align:center;">News</h6>
+        <p style="font-size: 30px;text-align:center;">Bản tin sẽ được cập nhật liên tục</p>
+        <div class="row">
+            <div class="col-lg-12 entries">
+
+                <!-- End blog entry -->
+                <!-- End blog entry -->
+                <!-- End blog entry -->
+                @foreach (var item in Model)
+                {
+                    <article class="entry">
+
+                        <div class="entry-img">
+                            <img src="@Url.Content("~/Assets/BlogLayout/img/" + item.AnhBlog)" alt="" class="img-fluid">
+                        </div>
+
+                        <h2 class="entry-title">
+                            <a href="blog-single.html">@item.TieuDe</a>
+                        </h2>
+
+                        <div class="entry-meta">
+                            <ul>
+                                <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="blog-single.html">@item.NgPost</a></li>
+                                <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="blog-single.html"><time datetime="2020-01-01">@item.ThoiGian</time></a></li>
+                                <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a href="blog-single.html">12 Comments</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="entry-content">
+                            <p style="font-size:18px;">
+                                @item.NoiDung.Substring(0, 90) ...
+                            </p>
+                            <div class="read-more">
+                                <a href="@Url.Action("chitietBlog","Home", new { @MaBlog = item.MaBlog })">Read More</a>
+                            </div>
+                        </div>
+
+                    </article><!-- End blog entry -->
+                }
+
+                <p style="text-align:center;">  Trang @(Model.PageCount<Model.PageNumber?0:Model.PageNumber)/@Model.PageCount</p>
+
+                <div class="menuTrang" style="text-align:center;">
+
+
+                </div>
+                <div class="blog-pagination">
+                    <ul class="justify-content-center">
+                        @Html.PagedListPager(Model, page => Url.Action("Blog", new { page = page, @searchkey = ViewBag.keyword }))
+                        @*<li><a href="#">1</a></li>
+                            <li class="active"><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>*@
+                    </ul>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</section>

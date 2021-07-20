@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewBag.Title = "Quản trị viên - Trang thông tin khách hàng";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Chào mừng Quản Trị Viên</h2>
+
+<div class="container"><button type="button" class="btn btn-sm btn-success pull-right" onclick="getCustomers()">Thêm KH</button></div>
+
+<table id="customerTable" class="tableId table table-striped">
+   
+    <thead>
+        <tr>
+            <th>Mã KH</th>
+            <th>Tên KH</th>
+            <th>Giới Tính</th>
+            <th>Địa Chỉ</th>
+            <th>Email</th>
+            <th>Số điện thoại</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    
+</table>
+
+<div class="modal fade" role="dialog" id="customerModal" aria-label="customerModelLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" id="customerModalBody"></div>
+    </div>
+</div>
+

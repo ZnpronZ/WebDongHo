@@ -1,0 +1,97 @@
+﻿@model List<ShopBanDongHo.ModelData.CartItem>
+@{
+    ViewBag.Title = "Payment";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+<div style="margin-top:100px; margin-bottom:60px;margin-left:100px;">
+<form method="post" action="#">
+    <input type="hidden" value="dY32yUjLzvsBE0Bj" name="form_key">
+
+    <table class="data-table cart-table" id="shopping-cart-table" border="1">
+        <thead class="hidden-phone">
+            <tr class="first last">
+
+                <th style="text-align:center; padding:5px;">
+                    Mã sản phẩm
+                </th>
+                <th style="text-align:center; padding:5px;">
+                    Tên sản phẩm
+                </th>
+                <th style="text-align:center; padding:5px;">
+                    Ảnh sản phẩm
+                </th>
+                <th style="text-align:center; padding:5px;">
+                    Đơn giá
+                </th>
+                <th style="text-align:center; padding:5px;">Số lượng</th>
+                <th style="text-align:center; padding:5px;">Thành tiền</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr class="first odd">
+                    <td>
+                        <h2 class="product-name">
+                            <a href="#">@item.chitietdongho.MaSP</a>
+                        </h2>
+                    </td>
+                    <td>
+                        <h2 class="product-name">
+                            <a href="#">@item.chitietdongho.TenSP</a>
+                        </h2>
+                    </td>
+                    <td>
+                        <img src=@Url.Content("~/Assets/images/" + item.chitietdongho.Anh) width="100" />
+                    </td>
+                    <td class="a-left">
+                        <span class="cart-price"> <span class="price">@item.chitietdongho.Gia</span> </span>
+                    </td>
+                    <td class="a-center">
+                        <span class="cart-price">
+                            <span class="price">@item.SoLuong</span>
+                        </span>
+                    </td>
+                    <td class="a-left a-subtotal">
+                        <span class="cart-price">
+                            <span class="price">@(item.chitietdongho.Gia * item.SoLuong)</span>
+                        </span>
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+    <br />
+
+    <script type="text/javascript">decorateTable('shopping-cart-table')</script>
+</form>
+
+<div class="section group">
+    <div class="row">
+        <div class="col-md-6">
+            @using (Html.BeginForm("Payment", "Cart", FormMethod.Post))
+            {
+                <div class="form-group">
+                    <label>Người nhận</label>
+                    <input name="shipName" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label>Điện thoại</label>
+                    <input name="shipMobile" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label>Địa chỉ</label>
+                    <input name="shipAdress" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input name="email" class="form-control" />
+                </div>
+                <button type="submit" class="btn">Gửi đơn hàng</button>
+            }
+        </div>
+    </div>
+</div>
+</div>

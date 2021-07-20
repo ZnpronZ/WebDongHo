@@ -1,0 +1,143 @@
+﻿@using ShopBanDongHo.Models
+@model ChiTietDongHo
+
+<form name="productForm" id="productForm">
+    @Html.AntiForgeryToken()
+    <div class="modal-header">
+        <h4 class="modal-title">
+            <button type="button" class="close pull-right" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <span>@(Model != null ? "Cập Nhật Sản Phẩm" : "Thêm Sản Phẩm")</span>
+        </h4>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <div class="preview">
+                        <img id="file-ip-1-preview" src="https://i.picsum.photos/id/866/200/300.jpg?hmac=rcadCENKh4rD6MAp6V_ma-AyWv641M4iiOpe1RyFHeI" class="avatar img-responsive" alt="avatar" style="width: 150px;height: 150px;vertical-align: middle;">
+                    </div>
+                    @Html.LabelFor(p => p.Anh, "Bấm để chọn ảnh", new { @class = "control-label", @for = "Anh", @style = "margin: 5px 15px 0px" })
+                    @Html.TextBoxFor(p => p.Anh, new { @type = "file", required = true, @accept = "image/*", @onchange = "showPreview(event);", @style = "visibility: hidden" })
+                    @Html.ValidationMessageFor(p => p.Anh, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group col-md-9">
+                @Html.LabelFor(p => p.MaSP, "Mã sản phẩm", htmlAttributes: new { @class = "control-label col-md-5" })
+                @if (Model != null)
+                {
+                    <div class="col-md-12">
+                        @Html.TextBoxFor(p => p.MaSP, new { @class = "form-control", @required = true, @disabled = "disabled" })
+                        @Html.ValidationMessageFor(p => p.MaSP, "", new { @class = "text-danger" })
+                    </div>
+                }
+                else
+                {
+                    <div class="col-md-12">
+                        @Html.TextBoxFor(p => p.MaSP, new { @class = "form-control", @required = true })
+                        @Html.ValidationMessageFor(p => p.MaSP, "", new { @class = "text-danger" })
+                    </div>
+                }
+                @Html.LabelFor(p => p.TenSP, "Tên sản phẩm", htmlAttributes: new { @class = "control-label col-md-5" })
+                <div class="col-md-12">
+                    @Html.TextBoxFor(p => p.TenSP, new { @class = "form-control", @required = true })
+                    @Html.ValidationMessageFor(p => p.TenSP, "", new { @class = "text-danger" })
+                </div>
+                @Html.LabelFor(p => p.ThuongHieu, "Thương hiệu", htmlAttributes: new { @class = "control-label col-md-5" })
+                <div class="col-md-12">
+                    @Html.DropDownListFor(p => p.ThuongHieu, new SelectList(Enum.GetValues(typeof(ThuongHieu))), "Chọn thương hiệu")
+                    @Html.ValidationMessageFor(p => p.ThuongHieu, "", new { @class = "text-danger" })
+                </div>
+                @Html.LabelFor(p => p.XuatXu, "Xuất Sứ", htmlAttributes: new { @class = "control-label col-md-5" })
+                <div class="col-md-12">
+                    @Html.DropDownListFor(p => p.XuatXu, new SelectList(Enum.GetValues(typeof(XuatSu))), "Chọn Xuất Sứ")
+                    @Html.ValidationMessageFor(p => p.XuatXu, "", new { @class = "text-danger" })
+                </div>
+                @Html.LabelFor(p => p.GioiTinh, "Giới Tính", htmlAttributes: new { @class = "control-label col-md-5" })
+                <div class="col-md-12">
+                    @Html.DropDownListFor(p => p.GioiTinh, new SelectList(Enum.GetValues(typeof(GioiTinh))), "Chọn Giới Tính")
+                    @Html.ValidationMessageFor(p => p.GioiTinh, "", new { @class = "text-danger" })
+                </div>
+                @Html.LabelFor(p => p.Gia, "Giá", htmlAttributes: new { @class = "control-label col-md-5" })
+                <div class="col-md-12">
+                    @Html.TextBoxFor(p => p.Gia, new { @class = "form-control", @required = true })
+                    @Html.ValidationMessageFor(p => p.Gia, "", new { @class = "text-danger" })
+                </div>
+                @Html.LabelFor(p => p.chatLieuMat, "Chất liệu mặt", htmlAttributes: new { @class = "control-label col-md-5" })
+                <div class="col-md-12">
+                    @Html.TextBoxFor(p => p.chatLieuMat, new { @class = "form-control", @required = true })
+                    @Html.ValidationMessageFor(p => p.chatLieuMat, "", new { @class = "text-danger" })
+                </div>
+                @Html.LabelFor(p => p.duongKinhMat, "Đường kính mặt", htmlAttributes: new { @class = "control-label col-md-5" })
+                <div class="col-md-12">
+                    @Html.TextBoxFor(p => p.duongKinhMat, new { @class = "form-control", @required = true })
+                    @Html.ValidationMessageFor(p => p.duongKinhMat, "", new { @class = "text-danger" })
+                </div>
+                @Html.LabelFor(p => p.chatLieuDay, "Chất liệu đáy", htmlAttributes: new { @class = "control-label col-md-5" })
+                <div class="col-md-12">
+                    @Html.TextBoxFor(p => p.chatLieuDay, new { @class = "form-control", @required = true })
+                    @Html.ValidationMessageFor(p => p.chatLieuDay, "", new { @class = "text-danger" })
+                </div>
+                @Html.LabelFor(p => p.sizeDay, "Size đáy", htmlAttributes: new { @class = "control-label col-md-5" })
+                <div class="col-md-12">
+                    @Html.TextBoxFor(p => p.sizeDay, new { @class = "form-control", @required = true })
+                    @Html.ValidationMessageFor(p => p.sizeDay, "", new { @class = "text-danger" })
+                </div>
+                @Html.LabelFor(p => p.chatLieuVo, "Chất liệu vỏ", htmlAttributes: new { @class = "control-label col-md-5" })
+                <div class="col-md-12">
+                    @Html.TextBoxFor(p => p.chatLieuVo, new { @class = "form-control", @required = true })
+                    @Html.ValidationMessageFor(p => p.chatLieuVo, "", new { @class = "text-danger" })
+                </div>
+                @Html.LabelFor(p => p.duongKinhVo, "Đường kính vỏ", htmlAttributes: new { @class = "control-label col-md-5" })
+                <div class="col-md-12">
+                    @Html.TextBoxFor(p => p.duongKinhVo, new { @class = "form-control", @required = true })
+                    @Html.ValidationMessageFor(p => p.duongKinhVo, "", new { @class = "text-danger" })
+                </div>
+                @Html.LabelFor(p => p.timeBaoHanh, "Thời gian bảo hành", htmlAttributes: new { @class = "control-label col-md-5" })
+                <div class="col-md-12">
+                    @Html.TextBoxFor(p => p.timeBaoHanh, new { @class = "form-control", @required = true })
+                    @Html.ValidationMessageFor(p => p.timeBaoHanh, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        @if (Model != null)
+        {
+            <button type="button" onclick="createOrUpdate('PUT')" class="btn btn-sm btn-primary pull-right">Sửa</button>
+        }
+        else
+        {
+            <button type="button" onclick="createOrUpdate('POST')" class="btn btn-sm btn-primary pull-right">Thêm</button>
+        }
+        <button type="button" class="btn btn-sm btn-secondary pull-left" data-dismiss="modal">Hủy bỏ</button>
+    </div>
+</form>
+
+<script>
+    function showPreview(event) {
+        if (event.target.files.length > 0) {
+            var src = URL.createObjectURL(event.target.files[0]);
+            var preview = document.getElementById("file-ip-1-preview");
+            preview.src = src;
+            preview.style.display = "block";
+        }
+    }
+
+    function createOrUpdate(reqType) {
+        console.log(reqType);
+        let modal = $("#productModal");
+        let form = $("form[name='productForm']");
+        form.validate({
+            lang: "vi"
+        });
+        if (!form.valid()) {
+            return;
+        }
+        else {
+            let productData = form.serialize();
+            console.log(productData);
+        }
+    }
+</script>

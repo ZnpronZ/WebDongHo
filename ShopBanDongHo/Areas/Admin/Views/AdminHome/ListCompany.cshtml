@@ -1,0 +1,229 @@
+﻿
+@{
+    ViewBag.Title = "ListCompany";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<h2>Danh sách công ty</h2>
+<div class="container">
+    <p>
+        <button type="button" id="TaoMoi" data-toggle="modal" data-target="#myModal" onclick="createCompanyNew()">Tạo mới chi nhánh</button>
+    </p>
+    <input type="text" placeholder="tìm kiếm theo tên Công ty" id="NameSearch" />
+    <input type="submit" onclick="searchName()" />
+    <table class="table">
+        <tr>
+            <th>
+                Tên công ty
+            </th>
+            <th>
+                Dịa chỉ
+            </th>
+            <th>
+                Số điện thoại
+            </th>
+            <th></th>
+        </tr>
+        <tbody id="allCty"></tbody>
+
+    </table>
+    <div class="container">
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Tạo chi nhánh</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div><label class="col-sm-4">  Tên công ty</label><input id="TenCTy" /></div>
+                        <div><label class="col-sm-4">   Dịa chỉ</label><input id="DiaChi" /></div>
+                        <div><label class="col-sm-4">   Số điện thoại</label><input id="SoDT" /></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default edit" data-dismiss="modal" onclick="createCompany()">Tạo mới</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+
+
+</div>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        loadAllCompany();
+
+    });
+    function loadAllCompany() {
+
+        var str = '';
+        $.ajax({
+            type: 'GET',
+            url: 'https://localhost:44374/api/company',
+            dataType: 'json',
+            success: function (data) {
+                console.log(data);
+                $.each(data, function (key, val) {
+                    str += '<tr class="ChiTiet"><td>' + val.TenCty + '</td><td>' + val.DiaChi + '</td><td>' + val.SoDT
+                        + '</td><td><button type="button" onclick="EditCompany(' + "'" + val.TenCTy + "'" + ')" data-toggle="modal" data-target="#myModal">Chỉnh sửa</button></td></tr>';
+                });
+
+                $('#allCty').html(str);
+            },
+            error: function (xhr) {
+                alert(xhr.responseText);
+            }
+        });
+
+    }
+    function searchName() {
+        //alert(document.getElementById("NameSearch").value);
+        var datas = document.getElementById("NameSearch").value;
+        //console.log(datas)
+        if (datas == '') {
+            alert('vui long nhap ten can tim');
+            loadAllCompany();
+        }
+        else {
+            var strs = '';
+            $.ajax({
+                type: 'GET',
+                url: 'https://localhost:44374/api/Company/GetAllCongty/?id=' + datas,
+                dataType: 'json',
+                success: function (data) {
+                    console.log(data);
+                    $('#allHoaDon').empty();
+                    $.each(data, function (key, val) {
+                        strs += '<tr class="ChiTiet"><td>' + val.TenCty + '</td><td>' + val.DiaChi + '</td><td>' + val.SoDT
+                            + '</td><td><button type="button" onclick="EditCompany(' + "'" + val.TenCTy + "'" + ')" data-toggle="modal" data-target="#myModal">Chỉnh sửa</button></td></tr>';
+                    });
+
+                    $('#allCty').html(strs);//nho bao sua
+                },
+                error: function (xhr) {
+                    alert(xhr.responseText);
+                }
+            });
+            $("#clicks").click(function () {
+                alert("The paragraph was clicked.");
+            });
+        }
+
+    }
+
+    //
+    function createCompanyNew() {
+        $(".edit").empty();
+        $(".edit").text("Tạo mới");
+        $("#TenCTy").attr('readonly', false);
+        $(".edit").attr('onclick', 'createCompany()');
+        document.getElementById("TenCTy").value = "";
+        document.getElementById("DiaChi").value = "";
+        document.getElementById("SoDT").value = "";
+    }
+
+
+    function createCompany() {
+
+        var TenCTy = document.getElementById("TenCTy").value;
+        var DiaChi = document.getElementById("DiaChi").value;
+        var SoDT = document.getElementById("SoDT").value;
+
+        if (TenCTy == '' || DiaChi == '' || SoDT == '') {
+            alert('Vui lòng nhập đầy đủ các trường')
+        }
+        else {
+            $.ajax({
+                type: 'POST',
+                url: 'https://localhost:44374/api/company/?tenCty=' + TenCTy + '&Diachi=' + DiaChi + '&SoDT=' + SoDT,
+                dataType: 'json',
+                success: function (data) {
+                    if (data == true) {
+                        alert('Tạo thành công');
+                        loadAllCompany();
+                    }
+
+                    else
+                        alert('Tạo thất bại!! Tên công ty Đã bị trùng');
+
+                }
+            });
+
+
+        }
+
+
+
+
+    }
+
+    function EditCompany(id) {
+        $("tr").click(function () {
+            var TenCTy = $(this).closest('.ChiTiet').find('td:nth-child(1)').text();
+            var DiaChi = $(this).closest('.ChiTiet').find('td:nth-child(2)').text();
+            var SoDT = $(this).closest('.ChiTiet').find('td:nth-child(3)').text();
+            //console.log(TenCTy);
+            //console.log(DiaChi);
+            //console.log(SoDT);
+
+
+            document.getElementById("TenCTy").value = TenCTy;
+            $("#TenCTy").attr('readonly', true);
+            document.getElementById("DiaChi").value = DiaChi;
+            document.getElementById("SoDT").value = SoDT;
+
+
+            $(".edit").empty();
+            $(".edit").text("Lưu chỉnh sửa");
+            $(".edit").attr('onclick', 'confirms()');
+
+
+
+
+        });
+
+
+    }
+    function confirms() {
+        var TenCTy = document.getElementById("TenCTy").value;
+        var DiaChi = document.getElementById("DiaChi").value;
+        var SoDT = document.getElementById("SoDT").value;
+        //console.log(TenCTy);
+        //console.log(DiaChi);
+        //console.log(SoDT);
+
+
+        if (TenCTy == '' || DiaChi == '' || SoDT == '') {
+            alert('Vui lòng nhập đầy đủ các trường')
+        }
+        else {
+            $.ajax({
+                type: 'PUT',
+                url: 'https://localhost:44374/api/company/?tenCty=' + TenCTy + '&Diachi=' + DiaChi + '&SoDT=' + SoDT,
+                dataType: 'json',
+                success: function (data) {
+                    if (data == true) {
+                        alert('Sửa thành công');
+                        loadAllCompany();
+                    }
+
+                    else
+                        alert('Sửa thất bại!!');
+
+                }
+            });
+
+
+        }
+
+
+    }
+</script>

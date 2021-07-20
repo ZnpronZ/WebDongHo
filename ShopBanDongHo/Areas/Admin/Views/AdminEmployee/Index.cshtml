@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewBag.Title = "Quản trị viên - Trang quản lý nhân viên";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div id="message"></div>
+
+<div class="container"><button type="button" class="btn btn-sm btn-success pull-right mb-1" onclick="getEmployees()">Thêm NV</button></div>
+
+<table id="employeeTable" class="tableId table table-striped">
+    <thead>
+        <tr>
+            <th>Mã NV</th>
+            <th>Tên NV</th>
+            <th>Số ĐT</th>
+            <th>Địa chỉ</th>
+            <th>Lương</th> 
+            <th>Sửa</th>
+            <th>Xóa</th>
+        </tr>
+    </thead>
+</table>
+
+<div class="modal fade" role="dialog" id="employeeModal" aria-label="employeeModelLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content" id="employeeModalBody"></div>
+    </div>
+</div>
+

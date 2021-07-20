@@ -1,0 +1,77 @@
+﻿@model ShopBanDongHo.Models.MultiData
+
+<div class="header-bottom">
+    <div class="container">
+        <div class="header">
+            <div class="col-md-9 header-left">
+                <div class="top-nav">
+                    <ul class="memenu skyblue">
+                        <li class="active"><a href="@Url.Action("Index","Product")">Home</a></li>
+                        <li class="grid">
+                            <a href="#">Xuất Xứ</a>
+                            <div class="mepanel">
+                                <div class="row">
+                                    <div class=" me-one">
+                                        <ul>
+
+                                            @foreach (var item in Model.xuatxu)
+                                            {
+                                                
+                                                <li><a href="@Url.Action("CategoryXuatXu","Product", new { @XuatXu = item.XuatXu })">@item.TenXuatXu</a></li>
+                                                
+                                            }
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="grid">
+                            <a href="#">Thương Hiệu</a>
+                            <div class="mepanel">
+                                <div class="row">
+                                    <div class="col-lg-6 me-one">
+                                        <ul>
+                                            @foreach (var item in Model.thuonghieu)
+                                            {
+                                                <li><a href="@Url.Action("CategoryThuongHieu","Product", new { @ThuongHieu = item.ThuongHieu })">@item.TenThuongHieu</a></li>
+
+                                            }
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="grid">
+                            <a href="#">Giới Tính</a>
+                            <div class="mepanel">
+                                <div class="row">
+                                    <div class="col-lg-6 me-one">
+                                        <ul>
+                                            <li><a href="@Url.Action("CategoryNam","Product")">Nam</a></li>
+                                            <li><a href="@Url.Action("CategoryNu","Product")">Nữ</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="grid">
+                            <a href="@Url.Action("Blog","Home")">Blog</a>
+                        </li>
+                        <li class="grid">
+                            <a href="@Url.Action("Contact","Home")">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="clearfix"> </div>
+            </div>
+            <div class="col-md-3 header-right">
+                <div class="search-bar">
+                    <form name="frmTimKiem" action="@Url.Action("KetQuaTimKiem","Search")" id="search-form" method="post">
+                        <input id="txtTK" name="txtTimKiem" type="text" class="txt" placeholder="Search" />
+                    </form>
+                </div>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e2660d12cbc643028231d76cc254eac1" Name="Diagram1">
+        <EntityTypeShape EntityType="QuanLiDongHoModel.Blog" Width="1.5" PointX="5.75" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLiDongHoModel.ChiTietDongHo" Width="1.5" PointX="3" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLiDongHoModel.ChiTietHoaDon" Width="1.5" PointX="5.75" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLiDongHoModel.CongTy" Width="1.5" PointX="0.75" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLiDongHoModel.DoanhThu" Width="1.5" PointX="2.75" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLiDongHoModel.HoaDon" Width="1.5" PointX="7.75" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLiDongHoModel.KhachHang" Width="1.5" PointX="7.75" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLiDongHoModel.NhanVien" Width="1.5" PointX="4.75" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLiDongHoModel.tThuongHieu" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLiDongHoModel.tXuatXu" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="QuanLiDongHoModel.fk_htk_ThuongHieu" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLiDongHoModel.fk_htk_XuatXu" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

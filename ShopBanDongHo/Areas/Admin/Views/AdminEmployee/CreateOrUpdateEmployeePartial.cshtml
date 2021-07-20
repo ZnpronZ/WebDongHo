@@ -1,0 +1,83 @@
+﻿@model ShopBanDongHo.Models.NhanVien
+
+<form name="employeeForm">
+    @Html.AntiForgeryToken()
+    <div class="modal-header">
+        <h4 class="modal-title">
+            <button type="button" class="close pull-right" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <span>@(Model.MaNV > 0? "Cập Nhật Thông Tin Nhân Viên" : "Thêm Nhân Viên")</span>
+        </h4>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            @*<div class="col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(nv => nv.urlAvatarPicture, "Ảnh", new { @class = "control-label col-md-5" }) <br />
+                        <img src="https://i.picsum.photos/id/866/200/300.jpg?hmac=rcadCENKh4rD6MAp6V_ma-AyWv641M4iiOpe1RyFHeI" class="avatar img-responsive" alt="avatar" style="width: 150px; height: 150px;"> <br />
+                            <div class="col-md-12">
+                                <button type="button" class="btn btn-secondary" id="chooseFile">Chọn ảnh</button> <br />
+                                @Html.TextBoxFor(nv => nv.urlAvatarPicture, new { @type = "file", required = true, @style = "opacity:0" })
+                                @Html.ValidationMessageFor(nv => nv.urlAvatarPicture, "", new { @class = "text-danger" })
+                                <span id="val"></span>
+                            </div>
+                    </div>
+                </div>*@
+            <div class="col-md-12">
+                @if (Model.MaNV > 0)
+                {
+                    <div class="form-group">
+                        @Html.LabelFor(nv => nv.MaNV, "Mã Nhân Viên", htmlAttributes: new { @class = "control-label col-md-5" })
+                        <div class="col-md-12">
+                            @Html.TextBoxFor(nv => nv.MaNV, new { @class = "form-control", @required = true, @disabled = "disabled" })
+                            @Html.ValidationMessageFor(nv => nv.MaNV, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                }
+                <div class="form-group">
+                    @Html.LabelFor(nv => nv.TenNV, "Tên Nhân Viên", htmlAttributes: new { @class = "control-label col-md-5" })
+                    <div class="col-md-12">
+                        @Html.TextBoxFor(nv => nv.TenNV, new { @class = "form-control", @required = true })
+                        @Html.ValidationMessageFor(nv => nv.TenNV, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(nv => nv.SoDT, "Số Điện Thoại", new { @class = "control-label col-md-5" })
+                    <div class="col-md-12">
+                        @Html.TextBoxFor(nv => nv.SoDT, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(nv => nv.SoDT, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(nv => nv.DiaChi, "Địa chỉ", htmlAttributes: new { @class = "control-label col-md-5" })
+                    <div class="col-md-12">
+                        @Html.EditorFor(nv => nv.DiaChi, new { htmlAttributes = new { @class = "form-control", required = true } })
+                        @Html.ValidationMessageFor(nv => nv.DiaChi, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(nv => nv.Luong, "Lương", htmlAttributes: new { @class = "control-label col-md-5" })
+                    <div class="col-md-12">
+                        @Html.EditorFor(nv => nv.Luong, new { htmlAttributes = new { @class = "form-control", required = true } })
+                        @Html.ValidationMessageFor(nv => nv.Luong, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        @if (Model.MaNV > 0)
+        {
+            <button type="button" onclick="createOrUpdate('PUT')" class="btn btn-sm btn-primary pull-right">Sửa</button>
+        }
+        else
+        {
+            <button type="button" onclick="createOrUpdate('POST')" class="btn btn-sm btn-primary pull-right">Thêm</button>
+        }
+        <button type="button" class="btn btn-sm btn-secondary pull-left" data-dismiss="modal">Hủy bỏ</button>
+    </div>
+</form>
+
+

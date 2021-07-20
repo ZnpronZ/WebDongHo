@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31129.286
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopBanDongHo", "ShopBanDongHo.csproj", "{E3C23EF1-028F-4944-91D8-29C509BE6C25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "common", "common\common.csproj", "{DA8DCBFC-43A2-4944-A645-27F891C30A72}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E3C23EF1-028F-4944-91D8-29C509BE6C25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3C23EF1-028F-4944-91D8-29C509BE6C25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3C23EF1-028F-4944-91D8-29C509BE6C25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E3C23EF1-028F-4944-91D8-29C509BE6C25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA8DCBFC-43A2-4944-A645-27F891C30A72}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA8DCBFC-43A2-4944-A645-27F891C30A72}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA8DCBFC-43A2-4944-A645-27F891C30A72}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA8DCBFC-43A2-4944-A645-27F891C30A72}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {557518A4-11CD-480C-BBC7-8370D620C523}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,207 @@
+﻿@model IEnumerable<ShopBanDongHo.Models.HoaDon>
+
+@{
+    ViewBag.Title = "";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Danh sách hóa đơn</h2>
+
+@*<p>
+        @Html.ActionLink("Create New", "Create")
+    </p>*@
+
+<input type="text" placeholder="tìm kiếm theo địa chỉ nhận hàng" id="NameSearch" />
+<input type="submit" onclick="searchName()" />
+<div class="container">
+    <table class="table">
+        <tr>
+            <th>
+                Mã hóa đơn
+            </th>
+            <th>
+                Mã khách hàng
+            </th>
+            <th>
+                Ngày đặt hàng
+            </th>
+            <th>
+                Người nhận
+            </th>
+            <th>
+                Số điện thoại nhận
+            </th>
+            <th>
+                Địa chỉ nhận hàng
+            </th>
+            <th>
+                Email liên hệ
+            </th>
+            <th></th>
+        </tr>
+        <tbody id="allHoaDon"></tbody>
+
+    </table>
+
+
+
+    <!-- Trigger the modal with a button -->
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Chi tiết hóa đơn</h4>
+                </div>
+                <div class="modal-body">
+                    <label>Dịa chỉ nhận : </label><p id="diachi"></p>
+                    <label>Người nhận : </label><p id="NguoiNhan"></p>
+                    <label>Số điện thoại : </label><p id="SoDienThoai"></p>
+                    <label>Tổng tiền </label><p id="TongTien"></p>
+                    <p>Chi tiết sản phẩm</p>
+                    <div>
+                        <table>
+                            <tr>
+                                <th>Mã hóa đơn</th>
+                                <th>Mã sản phẩm</th>
+                                <th>Tên sản phẩm</th>
+                                <th>Số lượng</th>
+                                <th>Giá</th>
+
+                            </tr>
+                            <tbody id="ChiTietHoaDon"></tbody>
+
+                        </table>
+
+
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" onclick="loadAll()" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+
+@*test*@
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        loadAll();
+    });
+    function loadAll() {
+        var str = '';
+        $.ajax({
+            type: 'GET',
+            url: 'https://localhost:44374/api/Bills',
+            dataType: 'json',
+            success: function (data) {
+                console.log(data);
+                $.each(data, function (key, val) {
+                    str += '<tr class="ChiTiet"><td>' + val.MaHD + '</td><td>'
+                        + val.MaKH + '</td><td>' + val.NgayTao + '</td><td>' + val.ShipName + '</td><td>'
+                        + val.ShipMobile + '</td><td>' + val.ShipAdress + '</td><td>' + val.ShipEmail
+                        + '</td><td><button type="button" onclick="Chitiethoadon(' + "'" + val.MaHD + "'" + ')" data-toggle="modal" data-target="#myModal">Chi tiết</button></td></tr>';
+                });
+
+                $('#allHoaDon').html(str);
+            },
+            error: function (xhr) {
+                alert(xhr.responseText);
+            }
+        });
+
+
+    }
+    function searchName() {
+        //alert(document.getElementById("NameSearch").value);
+        var datas = document.getElementById("NameSearch").value;
+        //console.log(datas)
+        if (datas == '') {
+            alert('vui long nhap ten can tim');
+            loadAll();
+        }
+        else {
+            var strs = '';
+            $.ajax({
+                type: 'GET',
+                url: 'https://localhost:44374/api/bills/GetHoaDonsbyname/?id=' + datas,
+                dataType: 'json',
+                success: function (data) {
+                    console.log(data);
+                    $('#allHoaDon').empty();
+                    $.each(data, function (key, val) {
+                        strs += '<tr><td>' + val.MaHD + '</td><td>'
+                            + val.MaKH + '</td><td>' + val.NgayTao + '</td><td>' + val.ShipName + '</td><td>'
+                            + val.ShipMobile + '</td><td>' + val.ShipAdress + '</td><td>' + val.ShipEmail
+                            + '</td><td><button type="button" onclick="Chitiethoadon(' + "'" + val.MaHD + "'" + ')" data-toggle="modal" data-target="#myModal">Chi tiết</button></td></tr>';
+                    });
+
+                    $('#allHoaDon').html(strs);
+                },
+                error: function (xhr) {
+                    alert(xhr.responseText);
+                }
+            });
+            $("#clicks").click(function () {
+                alert("The paragraph was clicked.");
+            });
+        }
+
+    }
+
+    function Chitiethoadon(id) {
+        var tongtien = 0;
+        console.log(id);
+        var strct = '';
+        $.ajax({
+            type: 'GET',
+            url: 'https://localhost:44374/GetChitetHoaDon/' + id,
+            dataType: 'json',
+            success: function (data) {
+                console.log(data);
+
+                $.each(data, function (key, val) {
+                    strct += '<tr><td>' + val.MaHD + '</td><td>'
+                        + val.MaSP + '</td><td>' + val.TenSP + '</td><td>' + val.SoLuong + '</td><td>'
+                        + val.TongTien + '</td></tr>';
+
+                    tongtien += val.TongTien;
+                });
+                console.log(tongtien);
+                $("#TongTien").empty();
+                document.getElementById("TongTien").append(tongtien);
+                $('#ChiTietHoaDon').html(strct);
+            },
+            error: function (xhr) {
+                alert(xhr.responseText);
+            }
+        });
+
+        $("tr").click(function () {
+            var DiaChi = $(this).closest('.ChiTiet').find('td:nth-child(6)').text();
+            var SoDienThoai = $(this).closest('.ChiTiet').find('td:nth-child(5)').text();
+            var NguoiNhan = $(this).closest('.ChiTiet').find('td:nth-child(4)').text();
+            $("#diachi").empty();
+            $("#NguoiNhan").empty();
+            $("#SoDienThoai").empty();
+
+            document.getElementById("diachi").append(DiaChi);
+            document.getElementById("NguoiNhan").append(NguoiNhan);
+            document.getElementById("SoDienThoai").append(SoDienThoai);
+
+
+
+
+        });
+    }
+</script>
